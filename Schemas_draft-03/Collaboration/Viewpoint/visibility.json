@@ -1,0 +1,15 @@
+{
+    "type": "object",
+    "properties": {
+        "default_visibility": {
+            "type": "boolean",
+            "default": "false"
+        },
+        "exceptions": {
+            "$ref": "component_list.json"
+        },
+        "view_setup_hints": {
+            "$ref": "view_setup_hints.json"
+        }
+    }
+}
