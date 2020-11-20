@@ -1,8 +1,0 @@
-{
-    "required": false,
-    "type": "array",
-    "items": {
-        "enum": ["update",
-        "delete"]
-    }
-}

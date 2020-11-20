@@ -1,5 +1,4 @@
 {
-    "$schema": "http://json-schema.org/draft-03/schema#",
     "title": "versions_GET",
     "description": "Schema for Versions",
     "type": "object",
@@ -10,6 +9,11 @@
             "items": {
                 "type": ["object", "null"],
                 "properties": {
+                    "api_id": {
+                        "type": "string",
+                        "enum": ["bcf","foundations"],
+                        "required": true
+                    },
                     "version_id": {
                         "type": "string",
                         "required": true

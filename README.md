@@ -1,10 +1,10 @@
 [![Official repository by buildingSMART International](https://img.shields.io/badge/buildingSMART-Official%20Repository-orange.svg)](https://www.buildingsmart.org/)
 [![This repo is managed by the CDE API Implementers Group](https://img.shields.io/badge/-BCF%20Implementers%20Group-blue.svg)](https://img.shields.io/badge/-BCF%20Implementers%20Group-blue.svg)
 
-# BSI API Foundations
+# Open CDE Foundations API
 ![](https://raw.githubusercontent.com/BuildingSMART/BCF/master/Icons/BCFicon128.png)
 
-**Version 0.1** based on BCF API v2.1.
+**Version 1.0** based on BCF API v2.1.
 [BCF API GitHub repository](https://github.com/buildingSMART/BCF-API/tree/release_2_1)
 
 **Table of Contents**
@@ -19,11 +19,9 @@
   * [1.5 Http Status Codes](#15-http-status-codes)
   * [1.6 Error Response Body Format](#16-error-response-body-format)
   * [1.7 DateTime Format](#17-datetime-format)
-  * [1.8 Authorization](#18-authorization)
-    + [1.8.1 Per-Entity Authorization](#181-per-entity-authorization)
-    + [1.8.2 Determining Authorized Entity Actions](#182-determining-authorized-entity-actions)
-  * [1.9 Additional Response and Request Object Properties](#19-additional-response-and-request-object-properties)
-  * [1.10 Binary File Uploads](#110-binary-file-uploads)
+  * [1.8 Additional Response and Request Object Properties](#18-additional-response-and-request-object-properties)
+  * [1.9 Binary File Uploads](#19-binary-file-uploads)
+  * [1.10 Differences Between null and Empty Lists](#110-differences-between-null-and-empty-lists)
 - [2. Public Services](#2-public-services)
   * [2.1 Versions Service](#21-versions-service)
   * [2.2 Authentication Services](#22-authentication-services)
@@ -38,11 +36,11 @@
 
 # 1. Introduction
 
-This is 
+The Open CDE Foundations API includes a small number of services and a few conventions that are common to all APIs.  
 
 ## 1.1 Paging, Sorting and Filtering
 
-When requesting collections of items, a BSI API Server should offer URL parameters according to the OData v4 specification. It can be found at [http://www.odata.org/documentation/](http://www.odata.org/documentation/).
+When requesting collections of items, the Server should offer URL parameters according to the OData v4 specification. It can be found at [http://www.odata.org/documentation/](http://www.odata.org/documentation/).
 
 ## 1.2 Caching
 
@@ -76,7 +74,7 @@ To work with browser based API clients using [Cross Origin Resource Sharing (Cor
 In a CORS scenario, web clients expect the following headers:
 * `Access-Control-Allow-Headers: Authorization, Content-Type, Accept` to allow the `Authorization`, `Content-Type` and `Accept` headers to be used via [XHR requests](https://en.wikipedia.org/wiki/XMLHttpRequest)
 * `Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS` to allow the Http methods the API needs
-* `Access-Control-Allow-Origin: example.com` to allow XHR requests from the `example.com` domain to the BSI API server
+* `Access-Control-Allow-Origin: example.com` to allow XHR requests from the `example.com` domain to the API server
 
 For example, Asp.Net applications in IIS need the following entries in their `web.config` file. `*` means the server allows any values.
 
@@ -90,17 +88,18 @@ For example, Asp.Net applications in IIS need the following entries in their `we
 
 ## 1.5 Http Status Codes
 
-The BSI APIs rely on the regular Http Status Code definitions. Good sources are [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) or the [HTTP/1.1 Specification](https://tools.ietf.org/html/rfc7231).
+Web-based APIs rely on the regular Http Status Code definitions. Good sources are [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) or the [HTTP/1.1 Specification](https://tools.ietf.org/html/rfc7231).
 
 Generally, these response codes shall be used in the API:
 * `200 - OK` for `GET` requests that return data or `PUT` requests that update data
 * `201 - Created` for `POST` requests that create data
+* `403 - Forbidden` for requests that can't be fulfilled because the user is not authorized to perform them
 
 `POST` and `PUT` requests do usually include the created resource in the response body. Exceptions to this rule are described in the specific section for the resource.
 
 ## 1.6 Error Response Body Format
 
-BCI APIs have a specified error response body format [error.json](Schemas_draft-03/error.json).
+All Open CDE APIs have a specified error response body format [error.json](schemas/error.json).
 
 ## 1.7 DateTime Format
 
@@ -109,72 +108,16 @@ DateTime values in this API are supposed to be in ISO 8601 compliant `YYYY-MM-DD
 For example, `2016-04-28T16:31:12.270+02:00` would represent _Thursday, April 28th, 2016, 16:31:12 (270ms) with a time zone offset of +2 hours relative to UTC._
 Please note that the colon in the timezone offset is optional, so `+02:00` is equivalent to `+0200`.
 
-## 1.8 Authorization
+To void ambiguity, This specification steps away from ISO 8601 on the topic of DateTime values with no timezone: The ISO 8601 says that DateTime values with no timezone designator are local times - **In BCF all DateTime values with no timezone designator as assumed to be in UTC**.
 
-API implementors can optionally choose to restrict the actions a user is allowed to perform on the applicable entities
-via the API. The global default authorizations for all entities are expressed in the project extensions schema and can
-be locally overridden in the entities themselves.
+## 1.8 Additional Response and Request Object Properties
 
-### 1.8.1 Per-Entity Authorization
+All API response and request Json objects may contain additional properties that are not part of the specified exchange for that endpoint.
+This is to allow server and client implementations freedom to add additional functionality. Servers and clients shall ignore those properties and must not produce errors on additional properties. Servers and clients are not required to preserve these properties.
 
-Whenever a user requests an update-able entity with the query parameter `includeAuthorization` equal to `true` the
-server should include an `authorization` field in the entity containing any local variations from the global
-authorization defaults for that entity. Using this information clients can decide whether to, for example, include an
-"Edit" button in the UI displaying the entity depending on the actions permitted for the user.
+## 1.9 Binary File Uploads
 
-### 1.8.2 Determining Authorized Entity Actions
-
-The client can calculate the available set of actions for a particular entity by taking the project-wide defaults from
-the project extensions, then replacing any keys defined in the entity's `authorization` map with the values specified
-locally. The meaning of each of the authorization keys is outlined in outlined in
-[4.1.5 Expressing User Authorization through Project Extensions](#415-expressing-user-authorization-through-project-extensions).
-
-**Example Scenario (Topic)**
-
-_In the Project Extensions_
-
-    {
-        "topic_actions": [],
-        "topic_status": [
-            "open",
-            "closed",
-            "confirmed"
-        ]
-    }
-
-Indicating that by default:
-
-* no modifications can be made to Topics
-* Topics can be placed in `open`, `closed` or `confirmed` status
-
-_In the Topic_
-
-    {
-        "authorization": {
-            "topic_actions": [
-                "update",
-                "createComment",
-                "createViewpoint"
-            ],
-            "topic_status": [
-                "closed"
-            ]
-        }
-    }
-
-Indicating that for this topic, the current user can:
-
-* update the Topic, or add comments or viewpoints
-* place the Topic into `closed` status
-
-## 1.9 Additional Response and Request Object Properties
-
-All API response and request Json objects may contain additional properties that are not covered by this specification.
-This is to allow server and client implementations freedom to add additional functionality. Servers and clients shall ignore those properties and must not produces errors on additional properties. Servers and clients are not required to preserve these properties.
-
-## 1.10 Binary File Uploads
-
-Some endpoints in the BSI APIs may expect binary file uploads, such as the BCF Document Service and the BCF BIM Snippet Service.
+Some endpoints may expect binary file uploads, such as the BCF Document Service and the BCF BIM Snippet Service.
 
 In such cases, files should be sent with the following Http headers:
 
@@ -183,17 +126,21 @@ In such cases, files should be sent with the following Http headers:
     Content-Length: {Size of file in bytes};
     Content-Disposition: attachment; filename="{Filename.extension}";
 
+## 1.10 Differences Between null and Empty Lists
+
+Some array or list properties and responses can be interpreted differently if they are either `null` or empty. In general, there are two cases to consider.
+
 ----------
 
 # 2. Public Services
 
 ## 2.1 Versions Service
 
-[versions_GET.json](Schemas_draft-03/Public/versions_GET.json)
+[versions_GET.json](schemas/versions_GET.json)
 
 **Resource URL (public resource)**
 
-    GET /bsi/versions
+    GET /opencde/versions
 
 **Parameters**
 
@@ -203,11 +150,11 @@ In such cases, files should be sent with the following Http headers:
 |version_id|string|Identifier of the version|true|
 |detailed_version|string|Url to specification on GitHub|false|
 
-Returns a list of all supported BSI API versions of the server.
+Returns a list of all supported Open CDE APIs and their versions.
 
 **Example Request**
 
-    GET /bsi/versions
+    GET /opencde/versions
 
 **Example Response**
 
@@ -215,29 +162,31 @@ Returns a list of all supported BSI API versions of the server.
     Body:
     {
         "versions": [{
-            "api_id": "bsi-foundations",
-            "version_id": "0.1",
-            "detailed_version": "https://github.com/BuildingSMART/BSI-FOUNDATIONS"
+            "api_id": "foundations",
+            "version_id": "1.0",
+            "detailed_version": "https://github.com/BuildingSMART/shared-common-API/tree/v1.0"
         }, {
             "api_id": "bcf",
             "version_id": "2.1",
-            "detailed_version": "https://github.com/BuildingSMART/BCF-API"
+            "detailed_version": "https://github.com/buildingSMART/BCF-API/tree/v2.1"
+        }, {
+            "api_id": "bcf",
+            "version_id": "2.2",
+            "detailed_version": "https://github.com/buildingSMART/BCF-API/tree/v2.2"
         }]
     }
-
-----------
 
 ## 2.2 Authentication Services
 
 ### 2.2.1 Obtaining Authentication Information
 
-[auth_GET.json](Schemas_draft-03/Authentication/auth_GET.json)
+[auth_GET.json](schemas/auth_GET.json)
 
 Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/draft-ietf-oauth-v2-22).
 
 **Resource URL (public resource)**
 
-    GET /bsi/{version}/auth
+    GET /opencde/{version}/auth
 
 **Parameters**
 
@@ -251,7 +200,7 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 
 If `oauth2_auth_url` is present, then `oauth2_token_url` must also be present and vice versa. If properties are not present in the response, clients should assume that the functionality is not supported by the server, e.g. a missing `http_basic_supported` property would indicate that Http basic authentication is not available on the server.
 
-OAuth2 flows are described in detail in the [OAuth2 specification](https://tools.ietf.org/html/rfc6749). BSI API servers may support the following workflows:
+OAuth2 flows are described in detail in the [OAuth2 specification](https://tools.ietf.org/html/rfc6749). Open CDE API servers may support the following flows:
 * `authorization_code_grant` - [4.1 - Authorization Code Grant](https://tools.ietf.org/html/rfc6749#section-4.1)
 * `implicit_grant` - [4.2 - Implicit Grant](https://tools.ietf.org/html/rfc6749#section-4.2)
 * `resource_owner_password_credentials_grant` - [4.3 - Resource Owner Password Credentials Grant](https://tools.ietf.org/html/rfc6749#section-4.3)
@@ -261,16 +210,16 @@ Also the [Extension Grants (section 4.5)](https://tools.ietf.org/html/rfc6749#se
 
 **Example Request**
 
-    GET /bsi/0.1/auth
+    GET /opencde/1.0/auth
 
 **Example Response**
 
     Response Code: 200 - OK
     Body:
     {
-        "oauth2_auth_url": "https://example.com/bsi/oauth2/auth",
-        "oauth2_token_url": "https://example.com/bsi/oauth2/token",
-        "oauth2_dynamic_client_reg_url": "https://example.com/bsi/oauth2/reg",
+        "oauth2_auth_url": "https://example.com/opencde/oauth2/auth",
+        "oauth2_token_url": "https://example.com/opencde/oauth2/token",
+        "oauth2_dynamic_client_reg_url": "https://example.com/opencde/oauth2/reg",
         "http_basic_supported": true,
         "supported_oauth2_flows": [
             "authorization_code_grant",
@@ -285,13 +234,13 @@ An example for the OAuth2 Authorization Grant workflow [can be found here](OAuth
 
 ### 2.2.3 OAuth2 Protocol Flow - Dynamic Client Registration
 
-[dynRegClient\_POST.json](Schemas_draft-03/Authentication/dynRegClient_POST.json)
+[dynRegClient\_POST.json](schemas/dynRegClient_POST.json)
 
-[dynRegClient\_GET.json](Schemas_draft-03/Authentication/dynRegClient_GET.json)
+[dynRegClient\_GET.json](schemas/dynRegClient_GET.json)
 
-The following part describes the optional dynamic registration process of a client. BSI API Servers may offer additional processes registering clients, for example allowing a client application developer to register his client on the servers website.
+The following part describes the optional dynamic registration process of a client. Open CDE API Servers may offer additional processes registering clients, for example allowing a client application developer to register his client on the servers website.
 
-The resource url for this service is server specific and is returned as `oauth2_dynamic_client_reg_url` in the `GET /bsi/{version}/auth` resource.
+The resource url for this service is server specific and is returned as `oauth2_dynamic_client_reg_url` in the `GET /opencde/{version}/auth` resource.
 
 Register a new client :
 
@@ -308,7 +257,7 @@ JSON encoded body using the `application/json` content type.
 
 **Example Request**
 
-    POST https://example.com/bsi/oauth2/reg
+    POST https://example.com/opencde/oauth2/reg
     Body:
     {
         "client_name": "Example Application",
@@ -332,15 +281,15 @@ JSON encoded body using the `application/json` content type.
 
 ### 2.3.1 Get current user
 
-[user_GET.json](Schemas_draft-03/User/user_GET.json)
+[user_GET.json](schemas/user_GET.json)
 
 **Resource URL**
 
-    GET /bsi/{version}/current-user
+    GET /opencde/{version}/current-user
 
 **Example Request**
 
-    GET /bsi/0.1/current-user
+    GET /opencde/1.0/current-user
 
 **Example Response**
 
@@ -351,5 +300,4 @@ JSON encoded body using the `application/json` content type.
         "name": "John Doe"
     }
 
-----------
 

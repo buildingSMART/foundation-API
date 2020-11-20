@@ -1,9 +1,0 @@
-{
-    "required": false,
-    "type": "array",
-    "items": {
-        "enum": ["update",
-        "createTopic",
-        "createDocument"]
-    }
-}
