@@ -259,8 +259,8 @@ JSON encoded body using the `application/json` content type.
 
 |parameter|type|description|
 |---------|----|-----------|
-|client_name|string (max. length 60)|The client name|
-|client_description|string (max. length 4000)|The client description|
+|client_name|string|The client name|
+|client_description|string|The client description|
 |client_url|string|An URL providing additional information about the client|
 |redirect_url|string|An URL where users are redirected after granting access to the client|
 
