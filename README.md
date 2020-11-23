@@ -36,11 +36,11 @@
 
 # 1. Introduction
 
-The Open CDE Foundation API includes a small number of services and a few conventions that are common to all Open CDE APIs.  
+The Open CDE Foundation API includes a small number of services and a few conventions that are common to all Open CDE APIs.
 
 ## 1.1 Paging, Sorting and Filtering
 
-When requesting collections of items, the Server should offer URL parameters according to the OData v4 specification. It can be found at [http://www.odata.org/documentation/](http://www.odata.org/documentation/).
+When requesting collections of items, the Server should offer URL parameters according to the [OData v4 specification](http://www.odata.org/documentation/).
 
 ## 1.2 Caching
 
@@ -93,9 +93,10 @@ Web-based APIs rely on the regular Http Status Code definitions. Good sources ar
 Generally, these response codes shall be used in the API:
 * `200 - OK` for `GET` requests that return data or `PUT` requests that update data
 * `201 - Created` for `POST` requests that create data
+* `401 - Unauthorized` for requests that have errors when authenticating the user
 * `403 - Forbidden` for requests that can't be fulfilled because the user is not authorized to perform them
 
-`POST` and `PUT` requests do usually include the created resource in the response body. Exceptions to this rule are described in the specific section for the resource.
+`POST` and `PUT` requests do usually include the created/modified resource in the response body. Exceptions to this rule are described in the specific section for the resource.
 
 ## 1.6 Error Response Body Format
 
@@ -108,7 +109,7 @@ DateTime values in this API are supposed to be in ISO 8601 compliant `YYYY-MM-DD
 For example, `2016-04-28T16:31:12.270+02:00` would represent _Thursday, April 28th, 2016, 16:31:12 (270ms) with a time zone offset of +2 hours relative to UTC._
 Please note that the colon in the timezone offset is optional, so `+02:00` is equivalent to `+0200`.
 
-To void ambiguity, This specification steps away from ISO 8601 on the topic of DateTime values with no timezone: The ISO 8601 says that DateTime values with no timezone designator are local times - **In BCF all DateTime values with no timezone designator are assumed to be in UTC.Therefore, adding a timezone designator is highly recommended. **.
+To void ambiguity, This specification steps away from ISO 8601 on the topic of DateTime values with no timezone: The ISO 8601 says that DateTime values with no timezone designator are local times - **In BCF all DateTime values with no timezone designator are assumed to be in UTC. Therefore, adding a timezone designator is highly recommended**.
 
 ## 1.8 Additional Response and Request Object Properties
 
@@ -205,7 +206,7 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 |oauth2_token_url|string|URL for token requests|false|
 |oauth2_dynamic_client_reg_url|string|URL for automated client registration|false|
 |http_basic_supported|boolean|Indicates if Http Basic Authentication is supported|false|
-|supported_oauth2_flows|string[]|array of supported OAuth2 flows|
+|supported_oauth2_flows|string[]|array of supported OAuth2 flows|true|
 
 If `oauth2_auth_url` is present, then `oauth2_token_url` must also be present and vice versa. If properties are not present in the response, clients should assume that the functionality is not supported by the server, e.g. a missing `http_basic_supported` property would indicate that Http basic authentication is not available on the server.
 
