@@ -69,7 +69,7 @@ This means that there is no partial update mechanism for objects but every PUT r
 
 ## 1.4 Cross Origin Resource Sharing (CORS)
 
-To work with browser based API clients using [Cross Origin Resource Sharing (Cors)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing), servers will put the `Access-Control-Allow'` headers in the response headers and specifiy who can access the servers Json resources. The client can look for these values and proceed with accessing the resources.
+To work with browser based API clients using [Cross Origin Resource Sharing (Cors)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing), servers will put the `Access-Control-Allow'` headers in the response headers and specify who can access the servers JSON resources. The client can look for these values and proceed with accessing the resources.
 
 In a CORS scenario, web clients expect the following headers:
 * `Access-Control-Allow-Headers: Authorization, Content-Type, Accept` to allow the `Authorization`, `Content-Type` and `Accept` headers to be used via [XHR requests](https://en.wikipedia.org/wiki/XMLHttpRequest)
@@ -112,7 +112,7 @@ To void ambiguity, This specification steps away from ISO 8601 on the topic of D
 
 ## 1.8 Additional Response and Request Object Properties
 
-All API response and request Json objects may contain additional properties that are not part of the specified exchange for that endpoint.
+All API response and request JSON objects may contain additional properties that are not part of the specified exchange for that endpoint.
 This is to allow server and client implementations freedom to add additional functionality. Servers and clients shall ignore those properties and must not produce errors on additional properties. Servers and clients are not required to preserve these properties.
 
 ## 1.9 Binary File Uploads
