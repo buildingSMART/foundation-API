@@ -50,7 +50,7 @@ The POST request should be done via HTTP Basic Authorization with your applicati
 
     POST https://example.com/opencde/oauth2/token?grant_type=authorization_code&code=<your_access_code>
 
-The access token will be returned as JSON in the response body and is an arbitrary string, guaranteed to not exceed 255 characters length.
+The access token will be returned as JSON in the response body and is an arbitrary string. There is no maximum length, per [oauth2 documentation](https://tools.ietf.org/html/rfc6749#section-1.4).
 
 **Example Response**
 
@@ -71,7 +71,7 @@ The process to retrieve a refresh token is exactly the same as retrieving a toke
 
     POST https://example.com/opencde/oauth2/token?grant_type=refresh_token&refresh_token=<your_refresh_token>
 
-The access token will be returned as JSON in the response body and is an arbitrary string, guaranteed to not exceed 255 characters length.
+The access token will be returned as JSON in the response body and is an arbitrary string.
 
 **Example Response**
 
