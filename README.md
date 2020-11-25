@@ -93,8 +93,8 @@ Web-based APIs rely on the regular Http Status Code definitions. Good sources ar
 Generally, these response codes shall be used in the API:
 * `200 - OK` for `GET` requests that return data or `PUT` requests that update data
 * `201 - Created` for `POST` requests that create data
-* `401 - Unauthorized` for requests that have errors when authenticating the user
-* `403 - Forbidden` for requests that can't be fulfilled because the user is not authorized to perform them
+* `401 - Unauthorized` for requests that have errors when the user is not authenticated
+* `403 - Forbidden` for requests when the user is authenticated but not authorized to perform the operation
 
 `POST` and `PUT` requests do usually include the created/modified resource in the response body. Exceptions to this rule are described in the specific section for the resource.
 
