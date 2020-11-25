@@ -172,7 +172,7 @@ Returns a list of all supported Open CDE APIs and their versions.
     Body:
     {
         "versions": [{
-            "api_id": "open-cde-foundation",
+            "api_id": "opencde-foundation",
             "version_id": "1.0",
             "detailed_version": "https://github.com/BuildingSMART/shared-common-API/tree/v1.0"
         }, {
