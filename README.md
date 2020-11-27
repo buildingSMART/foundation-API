@@ -179,10 +179,12 @@ Returns a list of all supported Open CDE APIs and their versions.
             "api_id": "bcf",
             "version_id": "2.1",
             "detailed_version": "https://github.com/buildingSMART/BCF-API/tree/v2.1"
+            "api_base_url": "https://server.base.url/bcf/2.1"
         }, {
             "api_id": "bcf",
-            "version_id": "2.2",
+            "version_id": "3.0",
             "detailed_version": "https://github.com/buildingSMART/BCF-API/tree/v2.2"
+            "api_base_url": "https://server.base.url/somepath/bcf/3.0"
         }]
     }
 
