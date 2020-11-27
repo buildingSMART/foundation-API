@@ -1,7 +1,7 @@
 [![Official repository by buildingSMART International](https://img.shields.io/badge/buildingSMART-Official%20Repository-orange.svg)](https://www.buildingsmart.org/)
-[![This repo is managed by the Open CDE APIs Implementers Group](https://img.shields.io/badge/-BCF%20Implementers%20Group-blue.svg)](https://img.shields.io/badge/-BCF%20Implementers%20Group-blue.svg)
+[![This repo is managed by the OpenCDE APIs Implementers Group](https://img.shields.io/badge/-BCF%20Implementers%20Group-blue.svg)](https://img.shields.io/badge/-BCF%20Implementers%20Group-blue.svg)
 
-# Open CDE Foundation API
+# OpenCDE Foundation API
 ![](https://raw.githubusercontent.com/BuildingSMART/BCF/master/Icons/BCFicon128.png)
 
 **Version 1.0** based on BCF API v2.1.
@@ -22,6 +22,7 @@
   * [1.8 Additional Response and Request Object Properties](#18-additional-response-and-request-object-properties)
   * [1.9 Binary File Uploads](#19-binary-file-uploads)
   * [1.10 Differences Between null and Empty Lists](#110-differences-between-null-and-empty-lists)
+  * [1.11 HTTPS/TLS](#111-httpstls)
 - [2. Public Services](#2-public-services)
   * [2.1 Versions Service](#21-versions-service)
   * [2.2 Authentication Services](#22-authentication-services)
@@ -36,7 +37,10 @@
 
 # 1. Introduction
 
-The Open CDE Foundation API includes a small number of services and a few conventions that are common to all Open CDE APIs.
+The OpenCDE Foundation API includes a small number of services and a few conventions that are common to all OpenCDE APIs.
+
+OpenCDE APIs support the exchange of information between software applications via a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) web interface, which means that data is exchanged via HTTP query parameters and JSON payloads. 
+URL schemas in this README are relative to the OpenCDE API servers' base-URL unless an absolute value is provided.
 
 ## 1.1 Paging, Sorting and Filtering
 
@@ -100,7 +104,7 @@ Generally, these response codes shall be used in the API:
 
 ## 1.6 Error Response Body Format
 
-All Open CDE APIs have a specified error response body format [error.json](schemas/error.json).
+All OpenCDE APIs have a specified error response body format [error.json](schemas/error.json).
 
 ## 1.7 DateTime Format
 
@@ -140,6 +144,10 @@ Some array or list properties and responses can be interpreted differently if th
 
 * If a list property is `null` (by explicitly setting it to null or not returning it in the response object at all), the client should not assume that this represents an empty list but instead the property is not present on the response object. Depending on the response object, this can have the same meaning as an empty list (e.g. no components in a viewpoint is the same as an empty list of components), but this can also mean the property is just omitted for optional properties (e.g. no `topic_actions` in an `authorization` object can mean no restrictions).
 
+## 1.11 HTTPS/TLS
+
+To ensure the security of API exchanges servers should only expose API endpoints over HTTPS with a minimal TLS version of 1.2. 
+
 ----------
 
 # 2. Public Services
@@ -160,7 +168,7 @@ Some array or list properties and responses can be interpreted differently if th
 |version_id|string|Identifier of the version|true|
 |detailed_version|string|Url to specification on GitHub|false|
 
-Returns a list of all supported Open CDE APIs and their versions.
+Returns a list of all supported OpenCDE APIs and their versions.
 
 **Example Request**
 
@@ -210,7 +218,7 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 
 If `oauth2_auth_url` is present, then `oauth2_token_url` must also be present and vice versa. If properties are not present in the response, clients should assume that the functionality is not supported by the server, e.g. a missing `http_basic_supported` property would indicate that Http basic authentication is not available on the server.
 
-OAuth2 flows are described in detail in the [OAuth2 specification](https://tools.ietf.org/html/rfc6749). Open CDE API servers may support the following flows:
+OAuth2 flows are described in detail in the [OAuth2 specification](https://tools.ietf.org/html/rfc6749). OpenCDE API servers may support the following flows:
 * `authorization_code_grant` - [4.1 - Authorization Code Grant](https://tools.ietf.org/html/rfc6749#section-4.1)
 * `implicit_grant` - [4.2 - Implicit Grant](https://tools.ietf.org/html/rfc6749#section-4.2)
 * `resource_owner_password_credentials_grant` - [4.3 - Resource Owner Password Credentials Grant](https://tools.ietf.org/html/rfc6749#section-4.3)
@@ -248,7 +256,7 @@ An example for the OAuth2 Authorization Grant workflow [can be found here](OAuth
 
 [dynRegClient\_GET.json](schemas/dynRegClient_GET.json)
 
-The following part describes the optional dynamic registration process of a client. Open CDE API Servers may offer additional processes registering clients, for example allowing a client application developer to register his client on the servers website.
+The following part describes the optional dynamic registration process of a client. OpenCDE API Servers may offer additional processes registering clients, for example allowing a client application developer to register his client on the servers website.
 
 The resource url for this service is server specific and is returned as `oauth2_dynamic_client_reg_url` in the `GET /opencde/{version}/auth` resource.
 
