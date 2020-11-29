@@ -166,7 +166,8 @@ To ensure the security of API exchanges servers should only expose API endpoints
 |---------|----|-----------|--------|
 |api_id|string|Identifier of the API|true|
 |version_id|string|Identifier of the version|true|
-|detailed_version|string|Url to specification on GitHub|false|
+|detailed_version|string|URL of the specification on GitHub|false|
+|api_base_url|string|An optional, fully qualified URL, to allow servers to relocate the API|false|
 
 Returns a list of all supported OpenCDE APIs and their versions.
 
