@@ -17,6 +17,7 @@
   * [1.3 Updating Resources via HTTP PUT](#13-updating-resources-via-http-put)
   * [1.4 Cross Origin Resource Sharing (CORS)](#14-cross-origin-resource-sharing-cors)
   * [1.5 Http Status Codes](#15-http-status-codes)
+    + [1.5.1 Conflict on creation](#151-conflict-on-creation)
   * [1.6 Error Response Body Format](#16-error-response-body-format)
   * [1.7 DateTime Format](#17-datetime-format)
   * [1.8 Additional Response and Request Object Properties](#18-additional-response-and-request-object-properties)
@@ -101,6 +102,10 @@ Generally, these response codes shall be used in the API:
 * `403 - Forbidden` for requests when the user is authenticated but not authorized to perform the operation
 
 `POST` and `PUT` requests do usually include the created/modified resource in the response body. Exceptions to this rule are described in the specific section for the resource.
+
+### 1.5.1 Conflict on creation
+
+For resource creation by `POST` with optional GUID specified, if the GUID already exists in the target system, status code `409 - Conflict` will be returned.
 
 ## 1.6 Error Response Body Format
 
