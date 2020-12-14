@@ -188,16 +188,16 @@ Returns a list of all supported OpenCDE APIs and their versions.
         "versions": [{
             "api_id": "opencde-foundation",
             "version_id": "1.0",
-            "detailed_version": "https://github.com/BuildingSMART/opencde-foundation-API/tree/v1.0"
+            "detailed_version": "https://github.com/BuildingSMART/opencde-foundation-API/tree/release_1_0"
         }, {
             "api_id": "bcf",
             "version_id": "2.1",
-            "detailed_version": "https://github.com/buildingSMART/BCF-API/tree/v2.1"
+            "detailed_version": "https://github.com/buildingSMART/BCF-API/tree/release_2_1"
             "api_base_url": "https://server.base.url/bcf/2.1"
         }, {
             "api_id": "bcf",
             "version_id": "3.0",
-            "detailed_version": "https://github.com/buildingSMART/BCF-API/tree/v3.0"
+            "detailed_version": "https://github.com/buildingSMART/BCF-API/tree/release_3_0"
             "api_base_url": "https://server.base.url/somepath/bcf/3.0"
         }]
     }
