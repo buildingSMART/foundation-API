@@ -70,7 +70,7 @@ The client may send an "If-None-Match" HTTP Header containing the last retrieved
 
 Whenever a resource offers the HTTP PUT method, it is to be updated as a whole.
 
-This means that there is no partial update mechanism for objects but every PUT request is sending the whole object representation. PUT schemas may exclude server generated values that cannot be edited, such as creation dates or authors.
+This means that there is no partial update mechanism for objects but every PUT request is sending the whole object representation.
 
 ## 1.4 Cross Origin Resource Sharing (CORS)
 
