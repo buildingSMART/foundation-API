@@ -7,6 +7,10 @@
 **Version 1.0** based on BCF API v2.1.
 [BCF API GitHub repository](https://github.com/buildingSMART/BCF-API/tree/v2.1)
 
+**Swagger / OpenAPI Specification**  
+[OpenCDE Foundation API on SwaggerHub](https://app.swaggerhub.com/apis/buildingSMART/OpenCDE-Foundation/1.0)  
+> The Swagger / OpenAPI specification is offered as a reference for implementers. The OpenCDE group may update it and fix issues as necessary at any time.
+
 **Table of Contents**
 
 <!-- toc -->
