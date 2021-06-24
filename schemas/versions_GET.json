@@ -11,7 +11,7 @@
                 "properties": {
                     "api_id": {
                         "type": "string",
-                        "enum": ["bcf","opencde-foundation"],
+                        "enum": ["bcf","foundation"],
                         "required": true
                     },
                     "version_id": {
