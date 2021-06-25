@@ -167,7 +167,7 @@ To ensure the security of API exchanges servers should only expose API endpoints
 
 **Resource URL (public resource)**
 
-    GET /opencde/versions
+    GET /foundation/versions
 
 **Parameters**
 
@@ -182,7 +182,7 @@ Returns a list of all supported OpenCDE APIs and their versions.
 
 **Example Request**
 
-    GET /opencde/versions
+    GET /foundation/versions
 
 **Example Response**
 
@@ -190,9 +190,9 @@ Returns a list of all supported OpenCDE APIs and their versions.
     Body:
     {
         "versions": [{
-            "api_id": "opencde-foundation",
+            "api_id": "foundation",
             "version_id": "1.0",
-            "detailed_version": "https://github.com/BuildingSMART/opencde-foundation-API/tree/release_1_0"
+            "detailed_version": "https://github.com/BuildingSMART/foundation-API/tree/release_1_0"
         }, {
             "api_id": "bcf",
             "version_id": "2.1",
@@ -216,7 +216,7 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 
 **Resource URL (public resource)**
 
-    GET /opencde/{version}/auth
+    GET /foundation/{version}/auth
 
 **Parameters**
 
@@ -240,16 +240,16 @@ Also the [Extension Grants (section 4.5)](https://tools.ietf.org/html/rfc6749#se
 
 **Example Request**
 
-    GET /opencde/1.0/auth
+    GET /foundation/1.0/auth
 
 **Example Response**
 
     Response Code: 200 - OK
     Body:
     {
-        "oauth2_auth_url": "https://example.com/opencde/oauth2/auth",
-        "oauth2_token_url": "https://example.com/opencde/oauth2/token",
-        "oauth2_dynamic_client_reg_url": "https://example.com/opencde/oauth2/reg",
+        "oauth2_auth_url": "https://example.com/foundation/oauth2/auth",
+        "oauth2_token_url": "https://example.com/foundation/oauth2/token",
+        "oauth2_dynamic_client_reg_url": "https://example.com/foundation/oauth2/reg",
         "http_basic_supported": true,
         "supported_oauth2_flows": [
             "authorization_code_grant",
@@ -270,7 +270,7 @@ An example for the OAuth2 Authorization Grant workflow [can be found here](OAuth
 
 The following part describes the optional dynamic registration process of a client. OpenCDE API Servers may offer additional processes registering clients, for example allowing a client application developer to register his client on the servers website.
 
-The resource url for this service is server specific and is returned as `oauth2_dynamic_client_reg_url` in the `GET /opencde/{version}/auth` resource.
+The resource url for this service is server specific and is returned as `oauth2_dynamic_client_reg_url` in the `GET /foundation/{version}/auth` resource.
 
 Register a new client :
 
@@ -287,7 +287,7 @@ JSON encoded body using the `application/json` content type.
 
 **Example Request**
 
-    POST https://example.com/opencde/oauth2/reg
+    POST https://example.com/foundation/oauth2/reg
     Body:
     {
         "client_name": "Example Application",
@@ -315,11 +315,11 @@ JSON encoded body using the `application/json` content type.
 
 **Resource URL**
 
-    GET /opencde/{version}/current-user
+    GET /foundation/{version}/current-user
 
 **Example Request**
 
-    GET /opencde/1.0/current-user
+    GET /foundation/1.0/current-user
 
 **Example Response**
 
