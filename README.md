@@ -208,6 +208,11 @@ Returns a list of all supported OpenCDE APIs and their versions.
             "version_id": "3.0",
             "detailed_version": "https://github.com/buildingSMART/BCF-API/tree/release_3_0",
             "api_base_url": "https://server.base.url/somepath/bcf/3.0"
+        }, {
+            "api_id": "documents",
+            "version_id": "1.0",
+            "detailed_version": "https://github.com/buildingSMART//documents-API/tree/release_1_0",
+            "api_base_url": "https://server.base.url/somepath/documents/1.0"
         }]
     }
 
