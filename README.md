@@ -122,12 +122,12 @@ All OpenCDE APIs have a specified error response body format [error.json](schema
 
 ## 1.7 DateTime Format
 
-DateTime values in this API are supposed to be in ISO 8601 compliant `YYYY-MM-DDThh:mm:ss` format with optional time zone indicators. This is the same format as defined in the Xml `xs:dateTime` type as well as the result of JavaScripts Date.toJson() output.
+DateTime values in this API must be ISO 8601 compliant and are defined in the rfc3339 (https://datatracker.ietf.org/doc/html/rfc3339#section-5.6). 
 
-For example, `2016-04-28T16:31:12.270+02:00` would represent _Thursday, April 28th, 2016, 16:31:12 (270ms) with a time zone offset of +2 hours relative to UTC._
-Please note that the colon in the timezone offset is optional, so `+02:00` is equivalent to `+0200`.
-
-To void ambiguity, This specification steps away from ISO 8601 on the topic of DateTime values with no timezone: The ISO 8601 says that DateTime values with no timezone designator are local times - **In BCF all DateTime values with no timezone designator are assumed to be in UTC. Therefore, adding a timezone designator is highly recommended**.
+Examples 
+`2016-04-28T16:31:12Z` would represent _Thursday, April 28th, 2016, 16:31:12 (0ms) in UTC timezone._
+`2016-04-28T16:31:12.270Z` would represent _Thursday, April 28th, 2016, 16:31:12 (270ms) in UTC timezone._
+`2016-04-28T16:31:12.270+02:00` would represent _Thursday, April 28th, 2016, 16:31:12 (270ms) with a time zone offset of +2 hours relative to UTC._
 
 ## 1.8 Additional Response and Request Object Properties
 
