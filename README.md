@@ -122,12 +122,12 @@ All OpenCDE APIs have a specified error response body format [error.json](schema
 
 ## 1.7 DateTime Format
 
-DateTime values in this API must be ISO 8601 compliant and are defined in the rfc3339 (https://datatracker.ietf.org/doc/html/rfc3339#section-5.6). 
+DateTime values must be [rfc3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) compliant. 
 
-Examples 
-`2016-04-28T16:31:12Z` would represent _Thursday, April 28th, 2016, 16:31:12 (0ms) in UTC timezone._
-`2016-04-28T16:31:12.270Z` would represent _Thursday, April 28th, 2016, 16:31:12 (270ms) in UTC timezone._
-`2016-04-28T16:31:12.270+02:00` would represent _Thursday, April 28th, 2016, 16:31:12 (270ms) with a time zone offset of +2 hours relative to UTC._
+Examples:
+* `2016-04-28T16:31:12Z` would represent _Thursday, April 28th, 2016, 16:31:12 (0ms) in UTC timezone._
+* `2016-04-28T16:31:12.270Z` would represent _Thursday, April 28th, 2016, 16:31:12 (270ms) in UTC timezone._
+* `2016-04-28T16:31:12.270+02:00` would represent _Thursday, April 28th, 2016, 16:31:12 (270ms) with a time zone offset of +2 hours relative to UTC._
 
 ## 1.8 Additional Response and Request Object Properties
 
