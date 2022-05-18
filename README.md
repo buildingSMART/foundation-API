@@ -4,8 +4,8 @@
 # OpenCDE Foundation API
 ![](https://raw.githubusercontent.com/BuildingSMART/BCF/master/Icons/BCFicon128.png)
 
-**Version 1.1**
-[BCF API GitHub repository](https://github.com/buildingSMART/BCF-API/tree/v1.1)
+**Version 1.1** Released together with Documents API 1.0.
+[BCF API GitHub repository](https://github.com/buildingSMART/Documents-API/tree/v1.0)
 
 ** Contributing **
 
