@@ -39,8 +39,9 @@ The Open CDE workgroup develops the Foundation API standard. The group meets eve
     + [2.2.1 Obtaining Authentication Information](#221-obtaining-authentication-information)
     + [2.2.2 OAuth2 Example](#222-oauth2-example)
     + [2.2.3 OAuth2 Protocol Flow - Dynamic Client Registration](#223-oauth2-protocol-flow---dynamic-client-registration)
-  * [2.3 User Services](#23-user-services)
-    + [2.3.1 Get current user](#231-get-current-user)
+- [3. Directory Services](#3-directory-services)
+  * [3.1 User Services](#31-user-services)
+    + [3.1.1 Get current user](#311-get-current-user)
 
 
 <!-- tocstop -->
@@ -322,9 +323,11 @@ JSON encoded body using the `application/json` content type.
 
 ----------
 
-## 2.3 User Services
+# 3. Directory Services
 
-### 2.3.1 Get current user
+## 3.1 User Services
+
+### 3.1.1 Get current user
 
 [user_GET.json](schemas/user_GET.json)
 
