@@ -170,6 +170,10 @@ To ensure the security of API exchanges servers should only expose API endpoints
 
 [versions_GET.json](schemas/versions_GET.json)
 
+The Versions service is used to discover the available OpenCDE APIs and where to find them. The `api_base_url` field specifies the base path for each API.
+ 
+To clarify, the Versions service allows specifying `api_base_url` for the Foundation API. However, to ensure discoverability, the Versions service is always served from the `/foundation/versions` base path regardless of the `api_base_url` parameter value. 
+
 **Resource URL (public resource)**
 
     GET /foundation/versions
@@ -196,8 +200,9 @@ Returns a list of all supported OpenCDE APIs and their versions.
     {
         "versions": [{
             "api_id": "foundation",
-            "version_id": "1.0",
-            "detailed_version": "https://github.com/BuildingSMART/foundation-API/tree/release_1_0"
+            "version_id": "1.1",
+            "detailed_version": "https://github.com/BuildingSMART/foundation-API/tree/release_1_1"
+            "api_base_url": "https://server.base.url/foundation/1.1"
         }, {
             "api_id": "bcf",
             "version_id": "2.1",
