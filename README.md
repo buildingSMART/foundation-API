@@ -4,12 +4,8 @@
 # OpenCDE Foundation API
 ![](https://raw.githubusercontent.com/BuildingSMART/BCF/master/Icons/BCFicon128.png)
 
-**Version 1.0** based on BCF API v2.1.
-[BCF API GitHub repository](https://github.com/buildingSMART/BCF-API/tree/v2.1)
-
-**Swagger / OpenAPI Specification**  
-[Foundation API on SwaggerHub](https://app.swaggerhub.com/apis/buildingSMART/Foundation/1.0)  
-> The Swagger / OpenAPI specification is offered as a reference for implementers. The OpenCDE group may update it and fix issues as necessary at any time.
+**Version 1.1** Released together with Documents API 1.0.
+[BCF API GitHub repository](https://github.com/buildingSMART/Documents-API/tree/v1.0)
 
 ** Contributing **
 
@@ -256,7 +252,7 @@ Also the [Extension Grants (section 4.5)](https://tools.ietf.org/html/rfc6749#se
 
 **Example Request**
 
-    GET /foundation/1.0/auth
+    GET /foundation/{version}/auth
 
 **Example Response**
 
