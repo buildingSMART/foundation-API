@@ -35,15 +35,6 @@ With the obtained _authorization code_, the client is able to request an access 
 
     POST https://example.com/foundation/oauth2/token
 
-**Parameters**
-
-|parameter|type|description|
-|---------|----|-----------|
-|access_token|string|The issued OAuth2 token|
-|token_type|string|Always `bearer`|
-|expires_in|integer|The lifetime of the access token in seconds|
-|refresh_token|string|The issued OAuth2 refresh token, one-time-usable only|
-
 The POST request should be done via HTTP Basic Authorization with your applications `client_id` as the username and your `client_secret` as the password.
 
 **Example Request**
@@ -51,6 +42,15 @@ The POST request should be done via HTTP Basic Authorization with your applicati
     POST https://example.com/foundation/oauth2/token?grant_type=authorization_code&code=<your_access_code>
 
 The access token will be returned as JSON in the response body and is an arbitrary string. There is no maximum length, per [oauth2 documentation](https://tools.ietf.org/html/rfc6749#section-1.4).
+
+**Response fields**
+
+|parameter|type|description|
+|---------|----|-----------|
+|access_token|string|The issued OAuth2 token|
+|token_type|string|Always `bearer`|
+|expires_in|integer|The lifetime of the access token in seconds|
+|refresh_token|string|The issued OAuth2 refresh token, one-time-usable only|
 
 **Example Response**
 
