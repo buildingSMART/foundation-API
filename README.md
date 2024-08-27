@@ -4,7 +4,7 @@
 ![buildingSMART_RGB_FoundationAPI_v4](https://github.com/user-attachments/assets/4fc5dc1d-2a0c-4e56-882b-94841a6ee920)
 
 **Version 1.1** Released together with Documents API 1.0.
-[BCF API GitHub repository](https://github.com/buildingSMART/Documents-API/tree/v1.0)
+[BCF API GitHub repository](https://github.com/buildingSMART/documents-API/tree/release_1_0)
 
 **Contributing**
 
