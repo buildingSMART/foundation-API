@@ -232,15 +232,19 @@ Authentication is based on the [OAuth 2.0 Protocol](http://tools.ietf.org/html/d
 
 **Parameters**
 
-|Parameter|Type|Description|Required|
-|---------|----|-----------|--------|
-|oauth2_auth_url|string|URL to authorization page (used for Authorization Code Grant and Implicit Grant OAuth2 flows)|false|
-|oauth2_token_url|string|URL for token requests|false|
-|oauth2_dynamic_client_reg_url|string|URL for automated client registration|false|
-|http_basic_supported|boolean|Indicates if Http Basic Authentication is supported|false|
-|supported_oauth2_flows|string[]|array of supported OAuth2 flows|true|
+| Parameter                     | Type     | Description                                                                                   | Required |
+|-------------------------------|----------|-----------------------------------------------------------------------------------------------|----------|
+| oauth2_auth_url               | string   | URL to authorization page (used for Authorization Code Grant and Implicit Grant OAuth2 flows) | false    |
+| oauth2_token_url              | string   | URL for token requests                                                                        | false    |
+| oauth2_dynamic_client_reg_url | string   | URL for automated client registration                                                         | false    |
+| pkce_required                 | boolean  | True if PKCE is required, only required for OAuth.                                            | false    |
+| code_challenge_method         | enum     | Code challenge method. Must be S256 if client supported.                                      | false    |
+| http_basic_supported          | boolean  | Indicates if Http Basic Authentication is supported                                           | false    |
+| supported_oauth2_flows        | string[] | array of supported OAuth2 flows                                                               | true     |
 
-If `oauth2_auth_url` is present, then `oauth2_token_url` must also be present and vice versa. If properties are not present in the response, clients should assume that the functionality is not supported by the server, e.g. a missing `http_basic_supported` property would indicate that Http basic authentication is not available on the server.
+If OAuth2 is supported, then `oauth2_auth_url`, `oauth2_token_url`, `pkce_required` and `code_challenge_method` are required.
+
+If HTTP basic authentication is supported, then `http_basic_supported` is required.
 
 OAuth2 flows are described in detail in the [OAuth2 specification](https://tools.ietf.org/html/rfc6749). OpenCDE API servers may support the following flows:
 * `authorization_code_grant` - [4.1 - Authorization Code Grant](https://tools.ietf.org/html/rfc6749#section-4.1)
@@ -249,6 +253,8 @@ OAuth2 flows are described in detail in the [OAuth2 specification](https://tools
 
 The [OAuth2 Client Credentials Grant (section 4.4)](https://tools.ietf.org/html/rfc6749#section-4.4) is not supported since it does not contain any user identity.
 Also the [Extension Grants (section 4.5)](https://tools.ietf.org/html/rfc6749#section-4.5) are not supported.
+
+If [PKCE](https://www.rfc-editor.org/rfc/rfc7636) is required, the crypto hash algorithm is assumed to be SHA 256 (S256) per [RFC7636](https://www.rfc-editor.org/rfc/rfc7636#section-4.2).
 
 **Example Request**
 
@@ -262,6 +268,8 @@ Also the [Extension Grants (section 4.5)](https://tools.ietf.org/html/rfc6749#se
         "oauth2_auth_url": "https://example.com/foundation/oauth2/auth",
         "oauth2_token_url": "https://example.com/foundation/oauth2/token",
         "oauth2_dynamic_client_reg_url": "https://example.com/foundation/oauth2/reg",
+        "pkce_required": true,
+        "code_challenge_method": "S256",
         "http_basic_supported": true,
         "supported_oauth2_flows": [
             "authorization_code_grant",
@@ -272,7 +280,9 @@ Also the [Extension Grants (section 4.5)](https://tools.ietf.org/html/rfc6749#se
 
 ### 2.2.2 OAuth2 Example
 
-An example for the OAuth2 Authorization Grant workflow [can be found here](OAuth2Examples.md).
+An example for the OAuth2 Authorization Grant workflow using a registered client with client secret [can be found here](OAuth2Examples.md).
+
+An example for the OAuth2 Authorization Grant workflow using a registered client with PKCE [can be found here](OAuth2PkceExamples.md).
 
 ### 2.2.3 OAuth2 Protocol Flow - Dynamic Client Registration
 

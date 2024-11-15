@@ -3,24 +3,25 @@
     "type": "object",
     "properties": {
         "oauth2_auth_url": {
-            "type": ["string",
-            "null"]
+            "type": ["string", "null"]
         },
         "oauth2_token_url": {
-            "type": ["string",
-            "null"]
+            "type": ["string", "null"]
         },
         "oauth2_dynamic_client_reg_url": {
-            "type": ["string",
-            "null"]
+            "type": ["string", "null"]
         },
         "http_basic_supported": {
-            "type": ["boolean",
-            "null"]
+            "type": ["boolean", "null"]
+        },
+        "pkce_required": {
+            "type": ["boolean", "null"]
+        },
+        "code_challenge_method": {
+            "enum": ["plain", "S256", "null"]
         },
         "supported_oauth2_flows": {
-            "type": ["array",
-            "null"],
+            "type": ["array", "null"],
             "items": {
                 "type": ["string"]
             }

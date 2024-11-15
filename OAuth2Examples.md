@@ -1,6 +1,6 @@
 # Open CDE APIs OAuth2 Example
 
-This example describes an example OAuth2 workflow using the _Authorization Code Grant_ flow as per [section 4.1 of the OAuth2 specification](https://tools.ietf.org/html/rfc6749#section-4.1). Uris of required endpoints are assumed to have been obtained from the authentication resource as described in [section 2.2 of the Foundation API specification](README.md#221-obtaining-authentication-information).
+This example describes an example OAuth2 workflow using the _Authorization Code Grant_ flow as per [section 4.1 of the OAuth2 specification](https://tools.ietf.org/html/rfc6749#section-4.1). URIs of required endpoints are assumed to have been obtained from the authentication resource as described in [section 2.2 of the Foundation API specification](README.md#221-obtaining-authentication-information).
 
 For this example, it is assumed that the client has been registered with the server in advance and has been issued valid credentials in the form of `client_id` and `client_secret`.
 
