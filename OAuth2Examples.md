@@ -19,8 +19,6 @@ Example URL:
 
     GET https://example.com/foundation/oauth2/auth?response_type=code&client_id=<your_client_id>&state=<user_defined_string>&redirect_url=https://YourWebsite.com
 
-_On Windows operating systems, it is possible to open the systems default browser by using the url to start a new process._
-
 Example redirected URL:
 
     https://YourWebsite.com/retrieveCode?code=<server_generated_code>&state=<user_defined_string>
